@@ -45,6 +45,9 @@ class SentencePieceTokenizer(Tokenizer):
             >>> print([tokenizer.encode(sentence) for sentence in sentences])
             [[5, 31, 9, 22, 19, 25, 12, 5, 13, 6, 10, ...
             >>> pretokens = [tokenizer.encode(sentence) for sentence in sentences]
+            >>> print("decode sentence")
+            >>> print([tokenizer.decode(tokens) for tokens in pretokens])
+            ["hello, i don't know how to use it?", 'tensorflow is awesome!', 'it is good framework.']
             >>> print("reload from dump file")
             >>> tokenizer = SentencePieceTokenizer(lower=True, language="ja")
             >>> tokenizer.load_sp_model("m")
@@ -158,7 +161,8 @@ if __name__ == "__main__":
     print("encoded sentence")
     print([tokenizer.encode(sentence) for sentence in sentences])
     pretokens = [tokenizer.encode(sentence) for sentence in sentences]
-
+    print("decode sentence")
+    print([tokenizer.decode(tokens) for tokens in pretokens])
     print("reload from dump file")
     tokenizer = SentencePieceTokenizer(lower=True, language="ja")
     tokenizer.load_sp_model("m")
