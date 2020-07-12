@@ -1,5 +1,10 @@
 # meguru tokenizer
 
+# installation and initialization
+
+    pip install meguru_tokenizer
+    sudachipy link -t full
+
 # Abstruction of Usage
 
 1.  Preprocess Using Each Tokenizer
@@ -9,10 +14,6 @@
       see. [official docs](https://mokkemeguru.github.io/meguru_tokenizer/index.html)
     - TODO: Tensorflow
     - TODO: PyTorch
-
-# initialization
-
-    sudachipy link -t full
 
 # RealWorld Example
 
