@@ -1,9 +1,24 @@
 #!/usr/bin/env python3
 
 from pathlib import Path
-from typing import List
+from typing import List, Tuple, Optional
 from meguru_tokenizer.base_tokenizer import Tokenizer
 import sentencepiece as spm
+
+
+class SentencePieceVocab:
+    def __init__(self, sp: spm.SentencePieceProcessor):
+        self.sp = sp
+        # extra vocab
+        self.unk = "<unk>"
+        self.pad = "<pad>"
+        self.bos = "<s>"
+        self.eos = "</s>"
+        self.mask = "<mask>"
+        self.extra_vocab = [self.unk, self.bos, self.eos, self.pad, self.mask]
+
+    def __len__(self):
+        return len(self.sp)
 
 
 class SentencePieceTokenizer(Tokenizer):
@@ -34,7 +49,7 @@ class SentencePieceTokenizer(Tokenizer):
             <s> 0
             </s> 0
             <pad> 0
-            None 0
+            <mask> 0
             ▁ -1.85354
             o -2.41476
             ...
@@ -63,38 +78,31 @@ class SentencePieceTokenizer(Tokenizer):
     languages = ["ja", "en", "de"]
 
     def __init__(
-        self,
-        normalize: bool = True,
-        lower: bool = True,
-        sp: spm.SentencePieceProcessor = None,
-        language: str = "unk",
+        self, normalize: bool = True, lower: bool = True, language: str = "unk",
     ):
         super().__init__(normalize=normalize, lower=lower, language=language)
 
-        self.sp = sp
-        self.vs = 0
-
     def vocab_size(self):
-        return self.vs
+        return len(self.vocab)
 
     def tokenize(self, sentence: str):
         sentence = self._normalize(sentence) if self.normalize else sentence
-        return self.sp.EncodeAsPieces(sentence)
+        return self.vocab.sp.EncodeAsPieces(sentence)
 
     def tokenize_list(self, sentences: List[str]):
         return [self.tokenize(sentence) for sentence in sentences]
 
     def encode(self, sentence: str):
         sentence = self._normalize(sentence) if self.normalize else sentence
-        return self.sp.EncodeAsIds(sentence)
+        return self.vocab.sp.EncodeAsIds(sentence)
 
     def decode(self, tokens: List[int]):
-        return self.sp.DecodeIds(tokens)
+        return self.vocab.sp.DecodeIds(tokens)
 
     def load_sp_model(self, prefix: str):
         sp = spm.SentencePieceProcessor()
         sp.Load(prefix + ".model")
-        self.sp = sp
+        self.vocab = SentencePieceVocab(sp)
 
     def train_sp(
         self,
@@ -103,7 +111,7 @@ class SentencePieceTokenizer(Tokenizer):
         vocab_size: int = 8000,
         character_coverage: float = 0.995,
         model_type="unigram",
-        user_defined_symbols: List[str] = None,
+        user_defined_symbols: Tuple[str] = ("<mask>"),
     ):
         """train sentencepiece model
 
@@ -126,17 +134,19 @@ class SentencePieceTokenizer(Tokenizer):
             f"--vocab_size={vocab_size}",
             f"--character_coverage={character_coverage}",
             f"--model_type={model_type}",
-            f"--user_defined_symbols={user_defined_symbols}",
         ]
+        if user_defined_symbols is not None:
+            user_defined_symbols = ["<mask>"]
+            user_defined_symbols = ",".join(user_defined_symbols)
+            parameters.append(f"--user_defined_symbols={user_defined_symbols}")
         parameter = " ".join(parameters)
         spm.SentencePieceTrainer.Train(parameter)
         self.load_sp_model(model_prefix)
-        self.vs = vocab_size
 
 
 if __name__ == "__main__":
 
-    tokenizer = SentencePieceTokenizer(lower=True, language="ja")
+    tokenizer = SentencePieceTokenizer(lower=True, language="en")
     sentences = [
         "Hello, I don't know how to use it?",
         "Tensorflow is awesome!",
