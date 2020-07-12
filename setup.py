@@ -23,6 +23,8 @@ requirements = [
     "nltk",
     "spacy==2.2.4",
     "sudachidict-full",
+    "torch",
+    "tensorflow>=2.2.0",
 ]
 
 setup_requirements = [

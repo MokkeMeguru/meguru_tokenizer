@@ -21,6 +21,7 @@ nltk = "*"
 spacy = "==2.2.4"
 sudachidict-full = "*"
 twine = "*"
+torch = "*"
 
 [requires]
 python_version = "3.7"

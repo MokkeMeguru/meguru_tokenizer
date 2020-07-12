@@ -8,10 +8,9 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
 
-class Vocab:
+class BaseVocab:
     def __init__(
         self,
-        extra_vocab: List[str] = [],
         unk: str = "<unk>",
         pad: str = "<pad>",
         bos: str = "<s>",
@@ -25,6 +24,18 @@ class Vocab:
         self.eos = eos
         self.mask = mask
         self.extra_vocab = [self.unk, self.bos, self.eos, self.pad, self.mask]
+
+
+class Vocab(BaseVocab):
+    def __init__(
+        self,
+        unk: str = "<unk>",
+        pad: str = "<pad>",
+        bos: str = "<s>",
+        eos: str = "</s>",
+        mask: str = "<mask>",
+    ):
+        super().__init__(unk, pad, bos, eos, mask)
 
         self.vocab_base = []
         self.w2i = {}

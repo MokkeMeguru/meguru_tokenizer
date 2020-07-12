@@ -4,18 +4,13 @@ from pathlib import Path
 from typing import List, Tuple, Optional
 from meguru_tokenizer.base_tokenizer import Tokenizer
 import sentencepiece as spm
+from meguru_tokenizer.vocab import BaseVocab
 
 
-class SentencePieceVocab:
+class SentencePieceVocab(BaseVocab):
     def __init__(self, sp: spm.SentencePieceProcessor):
+        super().__init__()
         self.sp = sp
-        # extra vocab
-        self.unk = "<unk>"
-        self.pad = "<pad>"
-        self.bos = "<s>"
-        self.eos = "</s>"
-        self.mask = "<mask>"
-        self.extra_vocab = [self.unk, self.bos, self.eos, self.pad, self.mask]
 
     def __len__(self):
         return len(self.sp)
