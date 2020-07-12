@@ -5,10 +5,9 @@
 1.  Preprocess Using Each Tokenizer
     e.g. sentencepiece preprocess / sudachi preprocess
 2.  Tokenize in your code using its Tokenizer
+    - basis
+      see. [official docs](https://mokkemeguru.github.io/meguru_tokenizer/index.html)
     - TODO: Tensorflow
-
-          <Tensorflow Example>
-
     - TODO: PyTorch
 
 # initialization
@@ -56,6 +55,12 @@
     pprint.pprint([tokenizer.encode(sentence) for sentence in sentences])
 
     # [[7, 8, 9, 10, 11, 12, 13, 14, 15, 5, 16], [17, 6, 18, 19], [5, 6, 20, 21, 22]]
+
+    print("decoded sentence")
+    pprint.pprint([tokenizer.decode(tokens) for tokens in encodes])
+    # ["hello , i do n't know how to use it ?",
+    #  'tensorflow is awesome !',
+    #  'it is good framework .']
 
     vocab_size = len(vocab)
 
