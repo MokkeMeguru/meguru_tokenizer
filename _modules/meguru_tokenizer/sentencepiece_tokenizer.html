@@ -195,6 +195,9 @@
 <span class="sd">            &gt;&gt;&gt; print([tokenizer.encode(sentence) for sentence in sentences])</span>
 <span class="sd">            [[5, 31, 9, 22, 19, 25, 12, 5, 13, 6, 10, ...</span>
 <span class="sd">            &gt;&gt;&gt; pretokens = [tokenizer.encode(sentence) for sentence in sentences]</span>
+<span class="sd">            &gt;&gt;&gt; print(&quot;decode sentence&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; print([tokenizer.decode(tokens) for tokens in pretokens])</span>
+<span class="sd">            [&quot;hello, i don&#39;t know how to use it?&quot;, &#39;tensorflow is awesome!&#39;, &#39;it is good framework.&#39;]</span>
 <span class="sd">            &gt;&gt;&gt; print(&quot;reload from dump file&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; tokenizer = SentencePieceTokenizer(lower=True, language=&quot;ja&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; tokenizer.load_sp_model(&quot;m&quot;)</span>
@@ -308,7 +311,8 @@
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;encoded sentence&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">([</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span> <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">])</span>
     <span class="n">pretokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span> <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">]</span>
-
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;decode sentence&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">([</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span> <span class="k">for</span> <span class="n">tokens</span> <span class="ow">in</span> <span class="n">pretokens</span><span class="p">])</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;reload from dump file&quot;</span><span class="p">)</span>
     <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">SentencePieceTokenizer</span><span class="p">(</span><span class="n">lower</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="s2">&quot;ja&quot;</span><span class="p">)</span>
     <span class="n">tokenizer</span><span class="o">.</span><span class="n">load_sp_model</span><span class="p">(</span><span class="s2">&quot;m&quot;</span><span class="p">)</span>
