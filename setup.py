@@ -8,8 +8,9 @@ import os
 PACKAGE = "meguru_tokenizer"
 here = os.path.abspath(os.path.dirname(__file__))
 
+about = {}
 with open(os.path.join(here, PACKAGE, "__version__.py")) as f:
-    version = f.read()
+    exec(f.read(), about)
 
 
 with open("readme.md") as readme_file:
@@ -60,6 +61,6 @@ setup(
     test_suite="tests",
     tests_require=test_requirements,
     url="https://github.com/MokkeMeguru/meguru_tokenizer",
-    version=version,
+    version=about["__version__"],
     zip_safe=False,
 )
