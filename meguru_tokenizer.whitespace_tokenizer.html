@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,12 +11,19 @@
   
 
   
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -29,11 +35,6 @@
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="meguru_tokenizer.vocab module" href="meguru_tokenizer.vocab.html" /> 
@@ -50,7 +51,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> meguru_tokenizer
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> meguru_tokenizer
           
 
           
@@ -73,6 +74,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -90,7 +92,7 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">meguru_tokenizer.whitespace_tokenizer module</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="meguru_tokenizer.html#module-contents">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meguru_tokenizer.html#module-meguru_tokenizer">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -98,6 +100,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -136,7 +139,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html">Docs</a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="meguru_tokenizer.html">meguru_tokenizer package</a> &raquo;</li>
         
@@ -159,8 +162,170 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="meguru-tokenizer-whitespace-tokenizer-module">
-<h1>meguru_tokenizer.whitespace_tokenizer module<a class="headerlink" href="#meguru-tokenizer-whitespace-tokenizer-module" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-meguru_tokenizer.whitespace_tokenizer">
+<span id="meguru-tokenizer-whitespace-tokenizer-module"></span><h1>meguru_tokenizer.whitespace_tokenizer module<a class="headerlink" href="#module-meguru_tokenizer.whitespace_tokenizer" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="meguru_tokenizer.whitespace_tokenizer.WhitespaceTokenizer">
+<em class="property">class </em><code class="sig-prename descclassname">meguru_tokenizer.whitespace_tokenizer.</code><code class="sig-name descname">WhitespaceTokenizer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">vocab</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference internal" href="meguru_tokenizer.vocab.html#meguru_tokenizer.vocab.Vocab" title="meguru_tokenizer.vocab.Vocab">meguru_tokenizer.vocab.Vocab</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">normalize</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">lower</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">language</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'en'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/meguru_tokenizer/whitespace_tokenizer.html#WhitespaceTokenizer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#meguru_tokenizer.whitespace_tokenizer.WhitespaceTokenizer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="meguru_tokenizer.base_tokenizer.html#meguru_tokenizer.base_tokenizer.Tokenizer" title="meguru_tokenizer.base_tokenizer.Tokenizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">meguru_tokenizer.base_tokenizer.Tokenizer</span></code></a></p>
+<p>tokenizer splits by whitespace</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pprint</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tokenizer</span> <span class="o">=</span> <span class="n">EnglishWhitespaceTokenizer</span><span class="p">(</span><span class="n">lower</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sentences</span> <span class="o">=</span> <span class="p">[</span>
+<span class="go">        &quot;Hello, I don&#39;t know how to use it?&quot;,</span>
+<span class="go">        &quot;Tensorflow is awesome!&quot;,</span>
+<span class="go">        &quot;it is good framework.&quot;,</span>
+<span class="go">     ]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vocab</span> <span class="o">=</span> <span class="n">Vocab</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">:</span>
+<span class="go">        vocab.add_vocabs(tokenizer.tokenize(sentence))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vocab</span><span class="o">.</span><span class="n">build_vocab</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tokenizer</span><span class="o">.</span><span class="n">vocab</span> <span class="o">=</span> <span class="n">vocab</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vocab</span><span class="o">.</span><span class="n">dump_vocab</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;vocab.txt&quot;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;vocabs:&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">vocab</span><span class="o">.</span><span class="n">i2w</span><span class="p">)</span>
+<span class="go">{0: &#39;&lt;pad&gt;&#39;,</span>
+<span class="go"> 1: &#39;&lt;unk&gt;&#39;,</span>
+<span class="go"> 2: &#39;&lt;s&gt;&#39;,</span>
+<span class="go"> 3: &#39;&lt;/s&gt;&#39;,</span>
+<span class="go"> 4: &#39;&lt;mask&gt;&#39;,</span>
+<span class="go"> 5: &#39;it&#39;,</span>
+<span class="go"> 6: &#39;is&#39;,</span>
+<span class="go"> 7: &#39;hello&#39;,</span>
+<span class="go"> 8: &#39;,&#39;,</span>
+<span class="go"> 9: &#39;i&#39;,</span>
+<span class="go"> 10: &#39;do&#39;,</span>
+<span class="go"> 11: &quot;n&#39;t&quot;,</span>
+<span class="go"> 12: &#39;know&#39;,</span>
+<span class="go"> 13: &#39;how&#39;,</span>
+<span class="go"> 14: &#39;to&#39;,</span>
+<span class="go"> 15: &#39;use&#39;,</span>
+<span class="go"> 16: &#39;?&#39;,</span>
+<span class="go"> 17: &#39;tensorflow&#39;,</span>
+<span class="go"> 18: &#39;awesome&#39;,</span>
+<span class="go"> 19: &#39;!&#39;,</span>
+<span class="go"> 20: &#39;good&#39;,</span>
+<span class="go"> 21: &#39;framework&#39;,</span>
+<span class="go"> 22: &#39;.&#39;}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;tokenized sentence&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">tokenize_list</span><span class="p">(</span><span class="n">sentences</span><span class="p">))</span>
+<span class="go">[[&#39;hello&#39;, &#39;,&#39;, &#39;i&#39;, &#39;do&#39;, &quot;n&#39;t&quot;, &#39;know&#39;, &#39;how&#39;, &#39;to&#39;, &#39;use&#39;, &#39;it&#39;, &#39;?&#39;],</span>
+<span class="go"> [&#39;tensorflow&#39;, &#39;is&#39;, &#39;awesome&#39;, &#39;!&#39;],</span>
+<span class="go"> [&#39;it&#39;, &#39;is&#39;, &#39;good&#39;, &#39;framework&#39;, &#39;.&#39;]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;encoded sentence&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">([</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span> <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">])</span><span class="o">&gt;</span>
+<span class="go">[[7, 8, 9, 10, 11, 12, 13, 14, 15, 5, 16], [17, 6, 18, 19], [5, 6, 20, 21, 22]]</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt id="meguru_tokenizer.whitespace_tokenizer.WhitespaceTokenizer.decode">
+<code class="sig-name descname">decode</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tokens</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/meguru_tokenizer/whitespace_tokenizer.html#WhitespaceTokenizer.decode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#meguru_tokenizer.whitespace_tokenizer.WhitespaceTokenizer.decode" title="Permalink to this definition">¶</a></dt>
+<dd><p>decode a sentence</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tokens</strong> (<em>List</em><em>[</em><em>int</em><em>]</em>) – tokens</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a sentence</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tokenize</span><span class="o">.</span><span class="n">tokenizer</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="go">&quot;おはようございます。&quot;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="meguru_tokenizer.whitespace_tokenizer.WhitespaceTokenizer.encode">
+<code class="sig-name descname">encode</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sentence</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/meguru_tokenizer/whitespace_tokenizer.html#WhitespaceTokenizer.encode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#meguru_tokenizer.whitespace_tokenizer.WhitespaceTokenizer.encode" title="Permalink to this definition">¶</a></dt>
+<dd><p>encode a sentence</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sentnece</strong> (<em>str</em>) – a sentence</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>tokens</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>List[int]</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tokenize</span><span class="o">.</span><span class="n">tokenizer</span><span class="p">(</span><span class="s2">&quot;おはようございます。&quot;</span><span class="p">)</span>
+<span class="go">[2, 3, 1, 4]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="meguru_tokenizer.whitespace_tokenizer.WhitespaceTokenizer.languages">
+<code class="sig-name descname">languages</code><em class="property"> = ['en', 'de']</em><a class="headerlink" href="#meguru_tokenizer.whitespace_tokenizer.WhitespaceTokenizer.languages" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="meguru_tokenizer.whitespace_tokenizer.WhitespaceTokenizer.tokenize">
+<code class="sig-name descname">tokenize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sentence</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/meguru_tokenizer/whitespace_tokenizer.html#WhitespaceTokenizer.tokenize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#meguru_tokenizer.whitespace_tokenizer.WhitespaceTokenizer.tokenize" title="Permalink to this definition">¶</a></dt>
+<dd><p>tokenize a sentence</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sentence</strong> (<em>str</em>) – a sentence</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>words</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>List[str]</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tokenizer</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="s2">&quot;おはようございます。&quot;</span><span class="p">)</span>
+<span class="go">[&quot;おはよう&quot;, &quot;ござい&quot;, &quot;ます&quot;, &quot;。&quot;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="meguru_tokenizer.whitespace_tokenizer.WhitespaceTokenizer.tokenize_list">
+<code class="sig-name descname">tokenize_list</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sentences</span><span class="p">:</span> <span class="n">List<span class="p">[</span>str<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/meguru_tokenizer/whitespace_tokenizer.html#WhitespaceTokenizer.tokenize_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#meguru_tokenizer.whitespace_tokenizer.WhitespaceTokenizer.tokenize_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>tokenize list of sentence
+:param sentences: sentence list
+:type sentences: List[str]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>list of listed words</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>List[List[str]]</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tokenizer</span><span class="o">.</span><span class="n">tokenize</span><span class="p">([</span><span class="s2">&quot;おはようございます。&quot;</span><span class="p">])</span>
+<span class="go">[[&quot;おはよう&quot;, &quot;ござい&quot;, &quot;ます&quot;, &quot;。&quot;]]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="meguru_tokenizer.whitespace_tokenizer.WhitespaceTokenizer.vocab_size">
+<code class="sig-name descname">vocab_size</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/meguru_tokenizer/whitespace_tokenizer.html#WhitespaceTokenizer.vocab_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#meguru_tokenizer.whitespace_tokenizer.WhitespaceTokenizer.vocab_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>vocaburary size</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>vocab_size</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 
@@ -181,11 +346,19 @@
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2020, MokkeMeguru
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -196,7 +369,6 @@
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

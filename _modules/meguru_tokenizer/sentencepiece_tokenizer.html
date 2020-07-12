@@ -1,0 +1,368 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>meguru_tokenizer.sentencepiece_tokenizer &mdash; meguru_tokenizer 0.1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> meguru_tokenizer
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../meguru_tokenizer.html">meguru_tokenizer package</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">meguru_tokenizer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>meguru_tokenizer.sentencepiece_tokenizer</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for meguru_tokenizer.sentencepiece_tokenizer</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">meguru_tokenizer.base_tokenizer</span> <span class="kn">import</span> <span class="n">Tokenizer</span>
+<span class="kn">import</span> <span class="nn">sentencepiece</span> <span class="k">as</span> <span class="nn">spm</span>
+
+
+<div class="viewcode-block" id="SentencePieceTokenizer"><a class="viewcode-back" href="../../meguru_tokenizer.sentencepiece_tokenizer.html#meguru_tokenizer.sentencepiece_tokenizer.SentencePieceTokenizer">[docs]</a><span class="k">class</span> <span class="nc">SentencePieceTokenizer</span><span class="p">(</span><span class="n">Tokenizer</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;tokenizer splits by SentencePiece</span>
+
+<span class="sd">    Examples:</span>
+
+<span class="sd">            &gt;&gt;&gt; tokenizer = SentencePieceTokenizer(lower=True, language=&quot;ja&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; sentences = [</span>
+<span class="sd">            &gt;&gt;&gt;     &quot;Hello, I don&#39;t know how to use it?&quot;,</span>
+<span class="sd">            &gt;&gt;&gt;     &quot;Tensorflow is awesome!&quot;,</span>
+<span class="sd">            &gt;&gt;&gt;     &quot;it is good framework.&quot;,</span>
+<span class="sd">            &gt;&gt;&gt; ]</span>
+<span class="sd">            &gt;&gt;&gt; source_file = Path(&quot;test.txt&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; with source_file.open(&quot;w&quot;, encoding=&quot;utf-8&quot;) as f:</span>
+<span class="sd">            &gt;&gt;&gt;     for s in sentences:</span>
+<span class="sd">            &gt;&gt;&gt;         f.write(s + &quot;\\n&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; tokenizer.train_sp(source_file, vocab_size=37)</span>
+<span class="sd">            &gt;&gt;&gt; print(&quot;vocabs:&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; with Path(&quot;m.vocab&quot;).open(&quot;r&quot;, encoding=&quot;utf-8&quot;) as f:</span>
+<span class="sd">            &gt;&gt;&gt;     line = f.readline()</span>
+<span class="sd">            &gt;&gt;&gt;     while line:</span>
+<span class="sd">            &gt;&gt;&gt;         w, idx = line.strip().split()</span>
+<span class="sd">            &gt;&gt;&gt;         print(f&quot;{w} {idx}&quot;)</span>
+<span class="sd">            &gt;&gt;&gt;         line = f.readline()</span>
+<span class="sd">            vocabs:</span>
+<span class="sd">            &lt;unk&gt; 0</span>
+<span class="sd">            &lt;s&gt; 0</span>
+<span class="sd">            &lt;/s&gt; 0</span>
+<span class="sd">            &lt;pad&gt; 0</span>
+<span class="sd">            None 0</span>
+<span class="sd">            ▁ -1.85354</span>
+<span class="sd">            o -2.41476</span>
+<span class="sd">            ...</span>
+<span class="sd">            &gt;&gt;&gt; print(&quot;tokenized sentence&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; print(tokenizer.tokenize_list(sentences))</span>
+<span class="sd">            [[&#39;▁&#39;, &#39;h&#39;, &#39;e&#39;, &#39;l&#39;, &#39;lo&#39;, &#39;,&#39;, &#39;▁i&#39;, &#39;▁&#39;, ...</span>
+<span class="sd">            &gt;&gt;&gt; print(&quot;encoded sentence&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; print([tokenizer.encode(sentence) for sentence in sentences])</span>
+<span class="sd">            [[5, 31, 9, 22, 19, 25, 12, 5, 13, 6, 10, ...</span>
+<span class="sd">            &gt;&gt;&gt; pretokens = [tokenizer.encode(sentence) for sentence in sentences]</span>
+<span class="sd">            &gt;&gt;&gt; print(&quot;reload from dump file&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; tokenizer = SentencePieceTokenizer(lower=True, language=&quot;ja&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; tokenizer.load_sp_model(&quot;m&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; print(&quot;tokenized sentence&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; print(tokenizer.tokenize_list(sentences))</span>
+<span class="sd">            [[&#39;▁&#39;, &#39;h&#39;, &#39;e&#39;, &#39;l&#39;, &#39;lo&#39;, &#39;,&#39;, &#39;▁i&#39;, &#39;▁&#39;, ...</span>
+<span class="sd">            &gt;&gt;&gt; print(&quot;encoded sentence&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; print([tokenizer.encode(sentence) for sentence in sentences])</span>
+<span class="sd">            [[5, 31, 9, 22, 19, 25, 12, 5, 13, 6, 10, ...</span>
+<span class="sd">            &gt;&gt;&gt; assert pretokens == [tokenizer.encode(sentence) for sentence in sentences]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">languages</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ja&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">,</span> <span class="s2">&quot;de&quot;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">normalize</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">lower</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">sp</span><span class="p">:</span> <span class="n">spm</span><span class="o">.</span><span class="n">SentencePieceProcessor</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">language</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;unk&quot;</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="n">normalize</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="n">lower</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="n">language</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">sp</span> <span class="o">=</span> <span class="n">sp</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vs</span> <span class="o">=</span> <span class="mi">0</span>
+
+<div class="viewcode-block" id="SentencePieceTokenizer.vocab_size"><a class="viewcode-back" href="../../meguru_tokenizer.sentencepiece_tokenizer.html#meguru_tokenizer.sentencepiece_tokenizer.SentencePieceTokenizer.vocab_size">[docs]</a>    <span class="k">def</span> <span class="nf">vocab_size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">vs</span></div>
+
+<div class="viewcode-block" id="SentencePieceTokenizer.tokenize"><a class="viewcode-back" href="../../meguru_tokenizer.sentencepiece_tokenizer.html#meguru_tokenizer.sentencepiece_tokenizer.SentencePieceTokenizer.tokenize">[docs]</a>    <span class="k">def</span> <span class="nf">tokenize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sentence</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">sentence</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_normalize</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalize</span> <span class="k">else</span> <span class="n">sentence</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sp</span><span class="o">.</span><span class="n">EncodeAsPieces</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="SentencePieceTokenizer.tokenize_list"><a class="viewcode-back" href="../../meguru_tokenizer.sentencepiece_tokenizer.html#meguru_tokenizer.sentencepiece_tokenizer.SentencePieceTokenizer.tokenize_list">[docs]</a>    <span class="k">def</span> <span class="nf">tokenize_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sentences</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span> <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="SentencePieceTokenizer.encode"><a class="viewcode-back" href="../../meguru_tokenizer.sentencepiece_tokenizer.html#meguru_tokenizer.sentencepiece_tokenizer.SentencePieceTokenizer.encode">[docs]</a>    <span class="k">def</span> <span class="nf">encode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sentence</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">sentence</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_normalize</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalize</span> <span class="k">else</span> <span class="n">sentence</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sp</span><span class="o">.</span><span class="n">EncodeAsIds</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="SentencePieceTokenizer.decode"><a class="viewcode-back" href="../../meguru_tokenizer.sentencepiece_tokenizer.html#meguru_tokenizer.sentencepiece_tokenizer.SentencePieceTokenizer.decode">[docs]</a>    <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tokens</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sp</span><span class="o">.</span><span class="n">DecodeIds</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="SentencePieceTokenizer.load_sp_model"><a class="viewcode-back" href="../../meguru_tokenizer.sentencepiece_tokenizer.html#meguru_tokenizer.sentencepiece_tokenizer.SentencePieceTokenizer.load_sp_model">[docs]</a>    <span class="k">def</span> <span class="nf">load_sp_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">sp</span> <span class="o">=</span> <span class="n">spm</span><span class="o">.</span><span class="n">SentencePieceProcessor</span><span class="p">()</span>
+        <span class="n">sp</span><span class="o">.</span><span class="n">Load</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;.model&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sp</span> <span class="o">=</span> <span class="n">sp</span></div>
+
+<div class="viewcode-block" id="SentencePieceTokenizer.train_sp"><a class="viewcode-back" href="../../meguru_tokenizer.sentencepiece_tokenizer.html#meguru_tokenizer.sentencepiece_tokenizer.SentencePieceTokenizer.train_sp">[docs]</a>    <span class="k">def</span> <span class="nf">train_sp</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">resource_flile</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">model_prefix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;m&quot;</span><span class="p">,</span>
+        <span class="n">vocab_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">8000</span><span class="p">,</span>
+        <span class="n">character_coverage</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.995</span><span class="p">,</span>
+        <span class="n">model_type</span><span class="o">=</span><span class="s2">&quot;unigram&quot;</span><span class="p">,</span>
+        <span class="n">user_defined_symbols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;train sentencepiece model</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">           resource_file (str): file for training sentencepiece</span>
+<span class="sd">           vocab_size (int): vocaburary size e.g. 8000, 16000</span>
+<span class="sd">           character_coverage (float) : character coverage [0, 1] default 0.995</span>
+<span class="sd">           model_type (str) : [&#39;unigram&#39;, &#39;char&#39;, &#39;bpe&#39;, &#39;word&#39;]</span>
+<span class="sd">                              ref. https://github.com/google/sentencepiece</span>
+<span class="sd">           user_defined_symbols (List[str]) : special tokens such as &quot;&lt;mask&gt;&quot;</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">           resource_file&#39;s is &quot;sentence per line&quot;</span>
+<span class="sd">           pre_defined_symbols : &lt;UNK&gt;, &lt;s&gt;, &lt;/s&gt;, &lt;pad&gt;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">parameters</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="sa">f</span><span class="s2">&quot;--input=</span><span class="si">{</span><span class="n">resource_flile</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">&quot;--model_prefix=</span><span class="si">{</span><span class="n">model_prefix</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;--pad_id=3&quot;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">&quot;--vocab_size=</span><span class="si">{</span><span class="n">vocab_size</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">&quot;--character_coverage=</span><span class="si">{</span><span class="n">character_coverage</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">&quot;--model_type=</span><span class="si">{</span><span class="n">model_type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">&quot;--user_defined_symbols=</span><span class="si">{</span><span class="n">user_defined_symbols</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="p">]</span>
+        <span class="n">parameter</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span>
+        <span class="n">spm</span><span class="o">.</span><span class="n">SentencePieceTrainer</span><span class="o">.</span><span class="n">Train</span><span class="p">(</span><span class="n">parameter</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_sp_model</span><span class="p">(</span><span class="n">model_prefix</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vs</span> <span class="o">=</span> <span class="n">vocab_size</span></div></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+
+    <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">SentencePieceTokenizer</span><span class="p">(</span><span class="n">lower</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="s2">&quot;ja&quot;</span><span class="p">)</span>
+    <span class="n">sentences</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;Hello, I don&#39;t know how to use it?&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Tensorflow is awesome!&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;it is good framework.&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+    <span class="n">source_file</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;test.txt&quot;</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">source_file</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">s</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">tokenizer</span><span class="o">.</span><span class="n">train_sp</span><span class="p">(</span><span class="n">source_file</span><span class="p">,</span> <span class="n">vocab_size</span><span class="o">=</span><span class="mi">37</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;vocabs:&quot;</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;m.vocab&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+        <span class="k">while</span> <span class="n">line</span><span class="p">:</span>
+            <span class="n">w</span><span class="p">,</span> <span class="n">idx</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">w</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;tokenized sentence&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">tokenize_list</span><span class="p">(</span><span class="n">sentences</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;encoded sentence&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">([</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span> <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">])</span>
+    <span class="n">pretokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span> <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">]</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;reload from dump file&quot;</span><span class="p">)</span>
+    <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">SentencePieceTokenizer</span><span class="p">(</span><span class="n">lower</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="s2">&quot;ja&quot;</span><span class="p">)</span>
+    <span class="n">tokenizer</span><span class="o">.</span><span class="n">load_sp_model</span><span class="p">(</span><span class="s2">&quot;m&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;tokenized sentence&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">tokenize_list</span><span class="p">(</span><span class="n">sentences</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;encoded sentence&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">([</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span> <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">])</span>
+    <span class="k">assert</span> <span class="n">pretokens</span> <span class="o">==</span> <span class="p">[</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span> <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">]</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, MokkeMeguru
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

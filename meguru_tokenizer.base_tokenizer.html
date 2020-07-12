@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,12 +11,19 @@
   
 
   
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -29,11 +35,6 @@
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="meguru_tokenizer.sentencepiece_tokenizer module" href="meguru_tokenizer.sentencepiece_tokenizer.html" />
@@ -51,7 +52,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> meguru_tokenizer
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> meguru_tokenizer
           
 
           
@@ -74,6 +75,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -91,7 +93,7 @@
 <li class="toctree-l3"><a class="reference internal" href="meguru_tokenizer.whitespace_tokenizer.html">meguru_tokenizer.whitespace_tokenizer module</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="meguru_tokenizer.html#module-contents">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meguru_tokenizer.html#module-meguru_tokenizer">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -99,6 +101,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -137,7 +140,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html">Docs</a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="meguru_tokenizer.html">meguru_tokenizer package</a> &raquo;</li>
         
@@ -160,8 +163,125 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="meguru-tokenizer-base-tokenizer-module">
-<h1>meguru_tokenizer.base_tokenizer module<a class="headerlink" href="#meguru-tokenizer-base-tokenizer-module" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-meguru_tokenizer.base_tokenizer">
+<span id="meguru-tokenizer-base-tokenizer-module"></span><h1>meguru_tokenizer.base_tokenizer module<a class="headerlink" href="#module-meguru_tokenizer.base_tokenizer" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="meguru_tokenizer.base_tokenizer.Tokenizer">
+<em class="property">class </em><code class="sig-prename descclassname">meguru_tokenizer.base_tokenizer.</code><code class="sig-name descname">Tokenizer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">normalize</span><span class="p">:</span> <span class="n">bool</span></em>, <em class="sig-param"><span class="n">lower</span><span class="p">:</span> <span class="n">bool</span></em>, <em class="sig-param"><span class="n">language</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'unk'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/meguru_tokenizer/base_tokenizer.html#Tokenizer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#meguru_tokenizer.base_tokenizer.Tokenizer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>Base Tokenizer
+.. attribute:: tokenizer</p>
+<blockquote>
+<div><p>tokenizer e.g. MeCab, Sudachi</p>
+</div></blockquote>
+<dl class="py method">
+<dt id="meguru_tokenizer.base_tokenizer.Tokenizer.decode">
+<em class="property">abstract </em><code class="sig-name descname">decode</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tokens</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/meguru_tokenizer/base_tokenizer.html#Tokenizer.decode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#meguru_tokenizer.base_tokenizer.Tokenizer.decode" title="Permalink to this definition">¶</a></dt>
+<dd><p>decode a sentence</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tokens</strong> (<em>List</em><em>[</em><em>int</em><em>]</em>) – tokens</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a sentence</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tokenize</span><span class="o">.</span><span class="n">tokenizer</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="go">&quot;おはようございます。&quot;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="meguru_tokenizer.base_tokenizer.Tokenizer.encode">
+<em class="property">abstract </em><code class="sig-name descname">encode</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sentnece</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/meguru_tokenizer/base_tokenizer.html#Tokenizer.encode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#meguru_tokenizer.base_tokenizer.Tokenizer.encode" title="Permalink to this definition">¶</a></dt>
+<dd><p>encode a sentence</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sentnece</strong> (<em>str</em>) – a sentence</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>tokens</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>List[int]</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tokenize</span><span class="o">.</span><span class="n">tokenizer</span><span class="p">(</span><span class="s2">&quot;おはようございます。&quot;</span><span class="p">)</span>
+<span class="go">[2, 3, 1, 4]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="meguru_tokenizer.base_tokenizer.Tokenizer.languages">
+<code class="sig-name descname">languages</code><em class="property"> = []</em><a class="headerlink" href="#meguru_tokenizer.base_tokenizer.Tokenizer.languages" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="meguru_tokenizer.base_tokenizer.Tokenizer.tokenize">
+<code class="sig-name descname">tokenize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sentence</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/meguru_tokenizer/base_tokenizer.html#Tokenizer.tokenize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#meguru_tokenizer.base_tokenizer.Tokenizer.tokenize" title="Permalink to this definition">¶</a></dt>
+<dd><p>tokenize a sentence</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sentence</strong> (<em>str</em>) – a sentence</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>words</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>List[str]</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tokenizer</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="s2">&quot;おはようございます。&quot;</span><span class="p">)</span>
+<span class="go">[&quot;おはよう&quot;, &quot;ござい&quot;, &quot;ます&quot;, &quot;。&quot;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="meguru_tokenizer.base_tokenizer.Tokenizer.tokenize_list">
+<code class="sig-name descname">tokenize_list</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sentences</span><span class="p">:</span> <span class="n">List<span class="p">[</span>str<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/meguru_tokenizer/base_tokenizer.html#Tokenizer.tokenize_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#meguru_tokenizer.base_tokenizer.Tokenizer.tokenize_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>tokenize list of sentence
+:param sentences: sentence list
+:type sentences: List[str]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>list of listed words</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>List[List[str]]</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tokenizer</span><span class="o">.</span><span class="n">tokenize</span><span class="p">([</span><span class="s2">&quot;おはようございます。&quot;</span><span class="p">])</span>
+<span class="go">[[&quot;おはよう&quot;, &quot;ござい&quot;, &quot;ます&quot;, &quot;。&quot;]]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="meguru_tokenizer.base_tokenizer.Tokenizer.vocab_size">
+<em class="property">abstract </em><code class="sig-name descname">vocab_size</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/meguru_tokenizer/base_tokenizer.html#Tokenizer.vocab_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#meguru_tokenizer.base_tokenizer.Tokenizer.vocab_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>vocaburary size</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>vocab_size</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 
@@ -184,11 +304,19 @@
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2020, MokkeMeguru
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -199,7 +327,6 @@
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

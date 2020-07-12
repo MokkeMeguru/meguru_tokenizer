@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,12 +11,19 @@
   
 
   
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -29,11 +35,6 @@
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="meguru_tokenizer.whitespace_tokenizer module" href="meguru_tokenizer.whitespace_tokenizer.html" />
@@ -51,7 +52,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> meguru_tokenizer
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> meguru_tokenizer
           
 
           
@@ -74,6 +75,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -91,7 +93,7 @@
 <li class="toctree-l3"><a class="reference internal" href="meguru_tokenizer.whitespace_tokenizer.html">meguru_tokenizer.whitespace_tokenizer module</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="meguru_tokenizer.html#module-contents">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meguru_tokenizer.html#module-meguru_tokenizer">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -99,6 +101,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -137,7 +140,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html">Docs</a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="meguru_tokenizer.html">meguru_tokenizer package</a> &raquo;</li>
         
@@ -160,8 +163,118 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="meguru-tokenizer-vocab-module">
-<h1>meguru_tokenizer.vocab module<a class="headerlink" href="#meguru-tokenizer-vocab-module" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-meguru_tokenizer.vocab">
+<span id="meguru-tokenizer-vocab-module"></span><h1>meguru_tokenizer.vocab module<a class="headerlink" href="#module-meguru_tokenizer.vocab" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="meguru_tokenizer.vocab.Vocab">
+<em class="property">class </em><code class="sig-prename descclassname">meguru_tokenizer.vocab.</code><code class="sig-name descname">Vocab</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">extra_vocab</span><span class="p">:</span> <span class="n">List<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">unk</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'&lt;unk&gt;'</span></em>, <em class="sig-param"><span class="n">pad</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'&lt;pad&gt;'</span></em>, <em class="sig-param"><span class="n">bos</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'&lt;s&gt;'</span></em>, <em class="sig-param"><span class="n">eos</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'&lt;/s&gt;'</span></em>, <em class="sig-param"><span class="n">mask</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'&lt;mask&gt;'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/meguru_tokenizer/vocab.html#Vocab"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#meguru_tokenizer.vocab.Vocab" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="meguru_tokenizer.vocab.Vocab.add_vocab">
+<code class="sig-name descname">add_vocab</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">word</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/meguru_tokenizer/vocab.html#Vocab.add_vocab"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#meguru_tokenizer.vocab.Vocab.add_vocab" title="Permalink to this definition">¶</a></dt>
+<dd><p>add a word into vocaburary to construct vocaburary list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>word</strong> (<em>str</em>) – a word</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="meguru_tokenizer.vocab.Vocab.add_vocabs">
+<code class="sig-name descname">add_vocabs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">words</span><span class="p">:</span> <span class="n">List<span class="p">[</span>str<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/meguru_tokenizer/vocab.html#Vocab.add_vocabs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#meguru_tokenizer.vocab.Vocab.add_vocabs" title="Permalink to this definition">¶</a></dt>
+<dd><p>add a words into vocaburary to construct vocaburary list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>words</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – list of word</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">words</span> <span class="o">=</span> <span class="n">sentence</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vocab</span><span class="o">.</span><span class="n">add_vocabs</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="meguru_tokenizer.vocab.Vocab.build_vocab">
+<code class="sig-name descname">build_vocab</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">min_freq</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">vocab_size</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/meguru_tokenizer/vocab.html#Vocab.build_vocab"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#meguru_tokenizer.vocab.Vocab.build_vocab" title="Permalink to this definition">¶</a></dt>
+<dd><p>build vocaburary list from added vocabs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>min_freq</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – minimum frequency of the vocab</p></li>
+<li><p><strong>vocab_size</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – maximum vocaburary size</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>when vocaburary is builded,
+the source of vocaburary will be removed to free memory space.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="meguru_tokenizer.vocab.Vocab.dump_vocab">
+<code class="sig-name descname">dump_vocab</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">export_path</span><span class="p">:</span> <span class="n">pathlib.Path</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/meguru_tokenizer/vocab.html#Vocab.dump_vocab"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#meguru_tokenizer.vocab.Vocab.dump_vocab" title="Permalink to this definition">¶</a></dt>
+<dd><p>dump vocab</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>export_path</strong> (<em>Path</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="meguru_tokenizer.vocab.Vocab.idx2word">
+<code class="sig-name descname">idx2word</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">idx</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/meguru_tokenizer/vocab.html#Vocab.idx2word"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#meguru_tokenizer.vocab.Vocab.idx2word" title="Permalink to this definition">¶</a></dt>
+<dd><p>word to index</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>idx</strong> (<em>int</em>) – index of the word</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the word which pairs of the word
+if the word is not found, will return “&lt;unk&gt;”</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="meguru_tokenizer.vocab.Vocab.load_vocab">
+<code class="sig-name descname">load_vocab</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">load_path</span><span class="p">:</span> <span class="n">pathlib.Path</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/meguru_tokenizer/vocab.html#Vocab.load_vocab"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#meguru_tokenizer.vocab.Vocab.load_vocab" title="Permalink to this definition">¶</a></dt>
+<dd><p>dump vocab</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>load_path</strong> (<em>Path</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="meguru_tokenizer.vocab.Vocab.word2idx">
+<code class="sig-name descname">word2idx</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">word</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/meguru_tokenizer/vocab.html#Vocab.word2idx"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#meguru_tokenizer.vocab.Vocab.word2idx" title="Permalink to this definition">¶</a></dt>
+<dd><p>word to index</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>word</strong> (<em>str</em>) – a word</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the idx which pairs of the word
+if idx is not found, will return the idx of “&lt;unk&gt;”</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 
@@ -184,11 +297,19 @@
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2020, MokkeMeguru
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -199,7 +320,6 @@
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {
