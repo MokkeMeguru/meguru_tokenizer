@@ -11,12 +11,15 @@ tensorflow-datasets = "*"
 recommonmark = "*"
 sphinxemoji = "*"
 sphinx-rtd-theme = "*"
+pudb = "*"
 
 [packages]
 ginza = "*"
 sentencepiece = "*"
 neologdn = "*"
 nltk = "*"
+spacy = "==2.2.4"
+sudachidict-full = "*"
 
 [requires]
 python_version = "3.7"

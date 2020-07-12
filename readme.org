@@ -19,6 +19,11 @@
 <Tensorflow Example>
     #+END_SRC
    - TODO: PyTorch
+* initialization
+
+#+BEGIN_SRC shell
+sudachipy link -t full
+#+END_SRC
 * RealWorld Example
 #+BEGIN_SRC python
 import meguru_tokenizer.whitespace_tokenizer import WhitespaceTokenizer

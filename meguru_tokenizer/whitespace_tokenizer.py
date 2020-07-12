@@ -60,6 +60,14 @@ class WhitespaceTokenizer(Tokenizer):
         >>> print("encoded sentence")
         >>> pprint.pprint([tokenizer.encode(sentence) for sentence in sentences])>
         [[7, 8, 9, 10, 11, 12, 13, 14, 15, 5, 16], [17, 6, 18, 19], [5, 6, 20, 21, 22]]
+        >>> encodes = []
+        >>> for sentence in sentences:
+        >>>     encodes.append(tokenizer.encode(sentence))
+        >>> print("decoded sentence")
+        >>> pprint.pprint([tokenizer.decode(tokens) for tokens in encodes])
+        ["hello , i do n't know how to use it ?",
+         'tensorflow is awesome !',
+         'it is good framework .']
     """
 
     languages = ["en", "de"]
@@ -69,9 +77,9 @@ class WhitespaceTokenizer(Tokenizer):
         vocab: Optional[Vocab] = None,
         normalize: bool = True,
         lower: bool = True,
-        language: str = "en",
+        language: str = "unk",
     ):
-        super().__init__(normalize=normalize, lower=lower, language="en")
+        super().__init__(normalize=normalize, lower=lower, language=language)
         self.vocab = vocab
         self.tokenizer = nltk.tokenize.NLTKWordTokenizer()
 
@@ -101,7 +109,7 @@ class WhitespaceTokenizer(Tokenizer):
 if __name__ == "__main__":
     import pprint
 
-    tokenizer = WhitespaceTokenizer(lower=True)
+    tokenizer = WhitespaceTokenizer(lower=True, language="en")
     sentences = [
         "Hello, I don't know how to use it?",
         "Tensorflow is awesome!",
@@ -123,12 +131,19 @@ if __name__ == "__main__":
     print("encoded sentence")
     pprint.pprint([tokenizer.encode(sentence) for sentence in sentences])
 
+    encodes = []
+    for sentence in sentences:
+        encodes.append(tokenizer.encode(sentence))
+
+    print("decoded sentence")
+    pprint.pprint([tokenizer.decode(tokens) for tokens in encodes])
+
     vocab_size = len(vocab)
     print("reload from dump file")
     vocab = Vocab()
     vocab.load_vocab(Path("vocab.txt"))
     assert vocab_size == len(vocab)
-    tokenizer = WhitespaceTokenizer(vocab=vocab)
+    tokenizer = WhitespaceTokenizer(vocab=vocab, language="en")
     pprint.pprint([tokenizer.encode(sentence) for sentence in sentences])
 
     vocab = Vocab()

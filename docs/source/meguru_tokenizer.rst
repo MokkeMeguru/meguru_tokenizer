@@ -9,6 +9,7 @@ Submodules
 
    meguru_tokenizer.base_tokenizer
    meguru_tokenizer.sentencepiece_tokenizer
+   meguru_tokenizer.sudachi_tokenizer
    meguru_tokenizer.vocab
    meguru_tokenizer.whitespace_tokenizer
 
