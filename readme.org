@@ -10,6 +10,11 @@
 #+exclude_tags: noexport
 #+creator: Emacs 26.3 (Org mode 9.4)
 * meguru tokenizer
+* installation and initialization
+#+BEGIN_SRC shell
+pip install meguru_tokenizer
+sudachipy link -t full
+#+END_SRC
 * Abstruction of Usage
 1. Preprocess Using Each Tokenizer
    e.g. sentencepiece preprocess / sudachi preprocess
@@ -18,10 +23,6 @@
     see. [[https://mokkemeguru.github.io/meguru_tokenizer/index.html][official docs]]
    - TODO: Tensorflow
    - TODO: PyTorch
-* initialization
-#+BEGIN_SRC shell
-sudachipy link -t full
-#+END_SRC
 * RealWorld Example
 #+BEGIN_SRC python
 import meguru_tokenizer.whitespace_tokenizer import WhitespaceTokenizer

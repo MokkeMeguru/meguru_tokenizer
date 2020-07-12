@@ -7,7 +7,14 @@ from setuptools import setup, find_packages
 with open("readme.md") as readme_file:
     readme = readme_file.read()
 
-requirements = []
+requirements = [
+    "ginza",
+    "sentencepiece",
+    "neologdn",
+    "nltk",
+    "spacy==2.2.4",
+    "sudachidict-full",
+]
 
 setup_requirements = [
     "pytest-runner",
