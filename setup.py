@@ -3,6 +3,14 @@
 """The setup script."""
 
 from setuptools import setup, find_packages
+import os
+
+PACKAGE = "meguru_tokenizer"
+here = os.path.abspath(os.path.dirname(__file__))
+
+with open(os.path.join(here, PACKAGE, "__version__.py")) as f:
+    version = f.read()
+
 
 with open("readme.md") as readme_file:
     readme = readme_file.read()
@@ -45,13 +53,13 @@ setup(
     long_description=readme,
     long_description_content_type="text/markdown",
     include_package_data=True,
-    keywords="meguru_tokenizer",
+    keywords=["tensorflow", "pytorch", "tokenizer", "nlp"],
     name="meguru_tokenizer",
     packages=find_packages(include=["meguru_tokenizer", "meguru_tokenizer.*"]),
     setup_requires=setup_requirements,
     test_suite="tests",
     tests_require=test_requirements,
     url="https://github.com/MokkeMeguru/meguru_tokenizer",
-    version="0.1.0",
+    version=version,
     zip_safe=False,
 )
