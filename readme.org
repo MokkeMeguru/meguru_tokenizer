@@ -1,8 +1,7 @@
 #+options: ':t *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline author:t
 #+options: broken-links:nil c:nil creator:nil d:(not "LOGBOOK") date:t e:t
 #+options: email:nil f:t inline:t num:t p:nil pri:nil prop:nil stat:t tags:t
-#+options: tasks:t tex:t timestamp:t title:t toc:t todo:t |:t
-#+title: meguru tokenizer
+#+options: tasks:t tex:t timestamp:t title:t toc:nil todo:t |:t
 #+date: <2020-07-11 Sat>
 #+author: MokkeMeguru
 #+email: meguru.mokke@gmail.com
@@ -10,6 +9,7 @@
 #+select_tags: export
 #+exclude_tags: noexport
 #+creator: Emacs 26.3 (Org mode 9.4)
+* meguru tokenizer
 * Abstruction of Usage
 1. Preprocess Using Each Tokenizer
    e.g. sentencepiece preprocess / sudachi preprocess

@@ -1,10 +1,4 @@
-# Table of Contents
-
-1.  [Abstruction of Usage](#org08a9eff)
-2.  [initialization](#orge4dc0f5)
-3.  [RealWorld Example](#org312fa19)
-
-<a id="org08a9eff"></a>
+# meguru tokenizer
 
 # Abstruction of Usage
 
@@ -17,13 +11,9 @@
 
     - TODO: PyTorch
 
-<a id="orge4dc0f5"></a>
-
 # initialization
 
     sudachipy link -t full
-
-<a id="org312fa19"></a>
 
 # RealWorld Example
 
