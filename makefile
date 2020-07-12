@@ -17,7 +17,7 @@ testrelease: dist
 	python -m twine upload --repository testpypi dist/*
 
 release: dist
-	python -m twine upload --repository dist/*
+	python -m twine upload --repository pypi dist/*
 
 
 # end

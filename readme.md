@@ -2,8 +2,10 @@
 
 # installation and initialization
 
+    ```shell
     pip install meguru_tokenizer
     sudachipy link -t full
+    ```
 
 # Abstruction of Usage
 
@@ -17,6 +19,7 @@
 
 # RealWorld Example
 
+    ```python
     import meguru_tokenizer.whitespace_tokenizer import WhitespaceTokenizer
     import pprint
 
@@ -89,3 +92,4 @@
         vocab.add_vocabs(tokenizer.tokenize(sentence))
     vocab.build_vocab(vocab_size=10)
     assert 10 == len(vocab)
+    ```
