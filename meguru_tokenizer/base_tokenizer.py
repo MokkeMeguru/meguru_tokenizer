@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 
-import neologdn
+
 import unicodedata
 from abc import ABC, abstractmethod
 from typing import List
 from pathlib import Path
+from neologdn import normalize
 
 
 class Tokenizer(ABC):
@@ -72,7 +73,7 @@ class Tokenizer(ABC):
         NotImplementedError()
 
     def _normalize(self, sentence: str):
-        sentence = neologdn.normalize(sentence)
+        sentence = normalize(sentence)
 
         if self.lower:
             sentence = sentence.lower()

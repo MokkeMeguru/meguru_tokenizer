@@ -12,9 +12,9 @@
 #
 import os
 import sys
-
+import neologdn
 sys.path.insert(0, os.path.abspath("../../../meguru_tokenizer"))
-
+sys.path.insert(0, os.path.abspath("../../meguru_tokenizer"))
 
 # -- Project information -----------------------------------------------------
 

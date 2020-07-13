@@ -4,7 +4,7 @@
 # You can set these variables from the command line, and also
 # from the environment for the first two.
 SPHINXOPTS    ?=
-SPHINXBUILD   ?= sphinx-build
+SPHINXBUILD   ?= pipenv run sphinx-build
 SOURCEDIR     = source
 BUILDDIR      = build
 
@@ -14,7 +14,7 @@ help:
 
 .PHONY: help Makefile
 apidoc:
-	sphinx-apidoc -f -e -o source ../meguru_tokenizer
+	pipenv run sphinx-apidoc -f -e -o source ../meguru_tokenizer
 
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).

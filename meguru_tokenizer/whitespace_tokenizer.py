@@ -106,6 +106,28 @@ class WhitespaceTokenizer(Tokenizer):
         return " ".join(words)
 
 
+class LooseWhitespaceTokenizer(WhitespaceTokenizer):
+    """tokenizer splits by whitespace (without NLTK tokenize)
+    """
+
+    languages = ["en", "de", "ja"]
+
+    def __init__(
+        self,
+        vocab: Optional[Vocab] = None,
+        normalize: bool = True,
+        lower: bool = True,
+        language: str = "unk",
+    ):
+        super().__init__(
+            vocab=vocab, normalize=normalize, lower=lower, language=language
+        )
+
+    def tokenize(self, sentence: str):
+        sentence = self._normalize(sentence) if self.normalize else sentence
+        return sentence.strip().split()
+
+
 if __name__ == "__main__":
     import pprint
 

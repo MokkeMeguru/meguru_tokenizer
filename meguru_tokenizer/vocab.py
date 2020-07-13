@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from abc import abstractmethod
 from pathlib import Path
 from typing import List, Optional
 from collections import Counter
@@ -24,6 +25,14 @@ class BaseVocab:
         self.eos = eos
         self.mask = mask
         self.extra_vocab = [self.unk, self.bos, self.eos, self.pad, self.mask]
+
+    @abstractmethod
+    def word2idx(self, word: str):
+        raise NotImplementedError()
+
+    @abstractmethod
+    def idx2word(self, idx: int):
+        raise NotImplementedError()
 
 
 class Vocab(BaseVocab):

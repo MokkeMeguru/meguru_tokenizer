@@ -1,6 +1,14 @@
 meguru\_tokenizer package
 =========================
 
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   meguru_tokenizer.process
+
 Submodules
 ----------
 

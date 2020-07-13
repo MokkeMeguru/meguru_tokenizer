@@ -15,6 +15,12 @@ class SentencePieceVocab(BaseVocab):
     def __len__(self):
         return len(self.sp)
 
+    def word2idx(self, word: str):
+        return self.sp.PieceToId(word)
+
+    def idx2word(self, idx: int):
+        return self.sp.IdToPiece(idx)
+
 
 class SentencePieceTokenizer(Tokenizer):
     """tokenizer splits by SentencePiece

@@ -22,6 +22,7 @@ spacy = "==2.2.4"
 sudachidict-full = "*"
 twine = "*"
 torch = "*"
+tensorflow =">=2.2.0"
 
 [requires]
 python_version = "3.7"
