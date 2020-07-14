@@ -24,7 +24,7 @@ class BaseVocab:
         self.bos = bos
         self.eos = eos
         self.mask = mask
-        self.extra_vocab = [self.unk, self.bos, self.eos, self.pad, self.mask]
+        self.extra_vocab = [self.pad, self.bos, self.eos, self.unk, self.mask]
 
     @abstractmethod
     def word2idx(self, word: str):

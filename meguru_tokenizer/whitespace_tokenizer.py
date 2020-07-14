@@ -15,12 +15,12 @@ class WhitespaceTokenizer(Tokenizer):
     Example:
 
         >>> import pprint
-        >>> tokenizer = EnglishWhitespaceTokenizer(lower=True)
+        >>> tokenizer = WhitespaceTokenizer(lower=True, language="en")
         >>> sentences = [
-                "Hello, I don't know how to use it?",
-                "Tensorflow is awesome!",
-                "it is good framework.",
-             ]
+        >>>     "Hello, I don't know how to use it?",
+        >>>     "Tensorflow is awesome!",
+        >>>     "it is good framework.",
+        >>>  ]
         >>> vocab = Vocab()
         >>> for sentence in sentences:
                 vocab.add_vocabs(tokenizer.tokenize(sentence))
@@ -30,9 +30,9 @@ class WhitespaceTokenizer(Tokenizer):
         >>> print("vocabs:")
         >>> pprint.pprint(vocab.i2w)
         {0: '<pad>',
-         1: '<unk>',
-         2: '<s>',
-         3: '</s>',
+         1: '<s>',
+         2: '</s>',
+         3: '<unk>',
          4: '<mask>',
          5: 'it',
          6: 'is',

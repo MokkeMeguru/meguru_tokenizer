@@ -25,10 +25,10 @@ class SudachiTokenizer(Tokenizer):
         >>> print("vocabs:")
         >>> pprint.pprint(vocab.i2w)
         vocabs:
-        {0: '<unk>',
+        {0: '<pad>',
          1: '<s>',
          2: '</s>',
-         3: '<pad>',
+         3: '<unk>',
          4: '<mask>',
          5: 'を',
          6: '。',
@@ -138,12 +138,14 @@ class SudachiTokenizer(Tokenizer):
         """tokenize a sentence
         Args:
             sentence(str): a sentence
+        
         Retuens:
             tokens(Tuple[str]): tokens
+
         Example:
-            >> > tokenizer.tokenize("おはようございます。おやすみなさい", True)
+            >>> tokenizer.tokenize("おはようございます。おやすみなさい", True)
             ["おはよう", "ござい", "ます", "おやすみ", "なさい"]
-            >> > tokenizer.tokenize("おはようございます。おやすみなさい", False)
+            >>> tokenizer.tokenize("おはようございます。おやすみなさい", False)
             [["おはよう", "ござい", "ます"], ["おやすみ", "なさい"]]
         """
         sentence = self._normalize(sentence) if self.normalize else sentence
@@ -151,12 +153,16 @@ class SudachiTokenizer(Tokenizer):
 
     def tokenize_list(self, sentences: List[str]):
         """tokenize sentences
+        
         Args:
             sentences(List[str]): sentences
+        
         Retuens:
             tokens(List[Tuple[str]]): list of tokens
+        
         Example:
-            >> > tokenizer.tokenize(["おはようございます", "こんにちは"])
+            
+            >>> tokenizer.tokenize(["おはようございます", "こんにちは"])
             [["おはよう", "ござい", "ます"], ["こんにちは"]]
         """
         return [self.tokenize(sentence) for sentence in sentences]

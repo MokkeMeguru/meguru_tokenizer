@@ -10,8 +10,10 @@ from neologdn import normalize
 
 class Tokenizer(ABC):
     """Base Tokenizer
+
     Attributes:
         tokenizer: tokenizer e.g. MeCab, Sudachi
+    
     """
 
     languages = []

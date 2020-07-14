@@ -12,6 +12,7 @@ recommonmark = "*"
 sphinxemoji = "*"
 sphinx-rtd-theme = "*"
 pudb = "*"
+jupyter = "*"
 
 [packages]
 ginza = "*"

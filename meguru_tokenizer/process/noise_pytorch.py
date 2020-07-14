@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""noising batched tokenized text for pytorch
+
+    origin https://github.com/shentianxiao/text-autoencoders
 """
-origin: https://github.com/shentianxiao/text-autoencoders
-"""
+
 import numpy as np
 import torch
 from meguru_tokenizer.vocab import BaseVocab
@@ -11,7 +14,7 @@ class Noiser:
     """Noising per padded batch tensor
 
     Note:
-        x is the torch.Tensor whose shape is [|S|, B]
+        x is the torch.Tensor whose shape is [\|S\|, B]
     """
 
     def __init__(self, vocab: BaseVocab):

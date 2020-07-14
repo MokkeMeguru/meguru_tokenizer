@@ -129,7 +129,6 @@ class Noiser:
 
 
 if __name__ == "__main__":
-    from urllib import request
     from pprint import pprint
     from pathlib import Path
     import re

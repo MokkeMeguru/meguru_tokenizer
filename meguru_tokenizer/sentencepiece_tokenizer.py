@@ -46,10 +46,10 @@ class SentencePieceTokenizer(Tokenizer):
             >>>         print(f"{w} {idx}")
             >>>         line = f.readline()
             vocabs:
-            <unk> 0
+            <pad> 0
             <s> 0
             </s> 0
-            <pad> 0
+            <unk> 0
             <mask> 0
             ▁ -1.85354
             o -2.41476
@@ -131,15 +131,16 @@ class SentencePieceTokenizer(Tokenizer):
         parameters = [
             f"--input={resource_flile}",
             f"--model_prefix={model_prefix}",
-            "--pad_id=3",
+            "--pad_id=0",
+            "--unk_id=3",
             f"--vocab_size={vocab_size}",
             f"--character_coverage={character_coverage}",
             f"--model_type={model_type}",
         ]
         if user_defined_symbols is not None:
             user_defined_symbols = ["<mask>"]
-            user_defined_symbols = ",".join(user_defined_symbols)
-            parameters.append(f"--user_defined_symbols={user_defined_symbols}")
+        user_defined_symbols = ",".join(user_defined_symbols)
+        parameters.append(f"--user_defined_symbols={user_defined_symbols}")
         parameter = " ".join(parameters)
         spm.SentencePieceTrainer.Train(parameter)
         self.load_sp_model(model_prefix)
