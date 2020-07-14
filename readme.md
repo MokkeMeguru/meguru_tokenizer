@@ -12,9 +12,10 @@ sudachipy link -t full
 1.  Preprocess Using Each Tokenizer
     e.g. sentencepiece preprocess / sudachi preprocess
 2.  Tokenize in your code using its Tokenizer
-    - basis
+    - basis    
       see. [official docs](https://mokkemeguru.github.io/meguru_tokenizer/index.html)
-    - TODO: Tensorflow
+    - Tensorflow    
+	  see. [tutorial](./tutorials/01_tokenize_tf.ipynb)
     - TODO: PyTorch
 
 # RealWorld Example
