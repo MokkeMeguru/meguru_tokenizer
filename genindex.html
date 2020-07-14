@@ -1,7 +1,9 @@
 
 
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   
@@ -11,19 +13,12 @@
   
 
   
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
-
-  
   
   
   
 
   
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -35,6 +30,11 @@
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
     <link rel="index" title="Index" href="#" />
     <link rel="search" title="Search" href="search.html" /> 
 </head>
@@ -50,7 +50,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home" alt="Documentation Home"> meguru_tokenizer
+            <a href="index.html" class="icon icon-home"> meguru_tokenizer
           
 
           
@@ -73,7 +73,6 @@
           
         </div>
 
-        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -89,7 +88,6 @@
             
           
         </div>
-        
       </div>
     </nav>
 
@@ -128,7 +126,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><a href="index.html">Docs</a> &raquo;</li>
         
       <li>Index</li>
     
@@ -158,6 +156,7 @@
  | <a href="#I"><strong>I</strong></a>
  | <a href="#L"><strong>L</strong></a>
  | <a href="#M"><strong>M</strong></a>
+ | <a href="#N"><strong>N</strong></a>
  | <a href="#S"><strong>S</strong></a>
  | <a href="#T"><strong>T</strong></a>
  | <a href="#V"><strong>V</strong></a>
@@ -178,6 +177,10 @@
 
 <h2 id="B">B</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="meguru_tokenizer.vocab.html#meguru_tokenizer.vocab.BaseVocab">BaseVocab (class in meguru_tokenizer.vocab)</a>
+</li>
+  </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="meguru_tokenizer.vocab.html#meguru_tokenizer.vocab.Vocab.build_vocab">build_vocab() (meguru_tokenizer.vocab.Vocab method)</a>
 </li>
@@ -227,8 +230,14 @@
 <h2 id="I">I</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="meguru_tokenizer.vocab.html#meguru_tokenizer.vocab.Vocab.idx2word">idx2word() (meguru_tokenizer.vocab.Vocab method)</a>
+      <li><a href="meguru_tokenizer.sentencepiece_tokenizer.html#meguru_tokenizer.sentencepiece_tokenizer.SentencePieceVocab.idx2word">idx2word() (meguru_tokenizer.sentencepiece_tokenizer.SentencePieceVocab method)</a>
+
+      <ul>
+        <li><a href="meguru_tokenizer.vocab.html#meguru_tokenizer.vocab.BaseVocab.idx2word">(meguru_tokenizer.vocab.BaseVocab method)</a>
 </li>
+        <li><a href="meguru_tokenizer.vocab.html#meguru_tokenizer.vocab.Vocab.idx2word">(meguru_tokenizer.vocab.Vocab method)</a>
+</li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -244,6 +253,8 @@
 </li>
         <li><a href="meguru_tokenizer.html#meguru_tokenizer.Tokenizer.languages">(meguru_tokenizer.Tokenizer attribute)</a>
 </li>
+        <li><a href="meguru_tokenizer.whitespace_tokenizer.html#meguru_tokenizer.whitespace_tokenizer.LooseWhitespaceTokenizer.languages">(meguru_tokenizer.whitespace_tokenizer.LooseWhitespaceTokenizer attribute)</a>
+</li>
         <li><a href="meguru_tokenizer.whitespace_tokenizer.html#meguru_tokenizer.whitespace_tokenizer.WhitespaceTokenizer.languages">(meguru_tokenizer.whitespace_tokenizer.WhitespaceTokenizer attribute)</a>
 </li>
       </ul></li>
@@ -252,6 +263,8 @@
       <li><a href="meguru_tokenizer.sentencepiece_tokenizer.html#meguru_tokenizer.sentencepiece_tokenizer.SentencePieceTokenizer.load_sp_model">load_sp_model() (meguru_tokenizer.sentencepiece_tokenizer.SentencePieceTokenizer method)</a>
 </li>
       <li><a href="meguru_tokenizer.vocab.html#meguru_tokenizer.vocab.Vocab.load_vocab">load_vocab() (meguru_tokenizer.vocab.Vocab method)</a>
+</li>
+      <li><a href="meguru_tokenizer.whitespace_tokenizer.html#meguru_tokenizer.whitespace_tokenizer.LooseWhitespaceTokenizer">LooseWhitespaceTokenizer (class in meguru_tokenizer.whitespace_tokenizer)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -274,6 +287,27 @@
 </li>
       </ul></li>
       <li>
+    meguru_tokenizer.process
+
+      <ul>
+        <li><a href="meguru_tokenizer.process.html#module-meguru_tokenizer.process">module</a>
+</li>
+      </ul></li>
+      <li>
+    meguru_tokenizer.process.noise_pytorch
+
+      <ul>
+        <li><a href="meguru_tokenizer.process.noise_pytorch.html#module-meguru_tokenizer.process.noise_pytorch">module</a>
+</li>
+      </ul></li>
+      <li>
+    meguru_tokenizer.process.noise_tf
+
+      <ul>
+        <li><a href="meguru_tokenizer.process.noise_tf.html#module-meguru_tokenizer.process.noise_tf">module</a>
+</li>
+      </ul></li>
+      <li>
     meguru_tokenizer.sentencepiece_tokenizer
 
       <ul>
@@ -287,6 +321,8 @@
         <li><a href="meguru_tokenizer.sudachi_tokenizer.html#module-meguru_tokenizer.sudachi_tokenizer">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     meguru_tokenizer.vocab
 
@@ -294,8 +330,6 @@
         <li><a href="meguru_tokenizer.vocab.html#module-meguru_tokenizer.vocab">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     meguru_tokenizer.whitespace_tokenizer
 
@@ -311,6 +345,12 @@
 </li>
         <li><a href="meguru_tokenizer.base_tokenizer.html#module-meguru_tokenizer.base_tokenizer">meguru_tokenizer.base_tokenizer</a>
 </li>
+        <li><a href="meguru_tokenizer.process.html#module-meguru_tokenizer.process">meguru_tokenizer.process</a>
+</li>
+        <li><a href="meguru_tokenizer.process.noise_pytorch.html#module-meguru_tokenizer.process.noise_pytorch">meguru_tokenizer.process.noise_pytorch</a>
+</li>
+        <li><a href="meguru_tokenizer.process.noise_tf.html#module-meguru_tokenizer.process.noise_tf">meguru_tokenizer.process.noise_tf</a>
+</li>
         <li><a href="meguru_tokenizer.sentencepiece_tokenizer.html#module-meguru_tokenizer.sentencepiece_tokenizer">meguru_tokenizer.sentencepiece_tokenizer</a>
 </li>
         <li><a href="meguru_tokenizer.sudachi_tokenizer.html#module-meguru_tokenizer.sudachi_tokenizer">meguru_tokenizer.sudachi_tokenizer</a>
@@ -323,6 +363,26 @@
   </ul></td>
 </tr></table>
 
+<h2 id="N">N</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="meguru_tokenizer.process.noise_pytorch.html#meguru_tokenizer.process.noise_pytorch.Noiser">Noiser (class in meguru_tokenizer.process.noise_pytorch)</a>
+
+      <ul>
+        <li><a href="meguru_tokenizer.process.noise_tf.html#meguru_tokenizer.process.noise_tf.Noiser">(class in meguru_tokenizer.process.noise_tf)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="meguru_tokenizer.process.noise_pytorch.html#meguru_tokenizer.process.noise_pytorch.Noiser.noisy">noisy() (meguru_tokenizer.process.noise_pytorch.Noiser method)</a>
+
+      <ul>
+        <li><a href="meguru_tokenizer.process.noise_tf.html#meguru_tokenizer.process.noise_tf.Noiser.noisy">(meguru_tokenizer.process.noise_tf.Noiser method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
 <h2 id="S">S</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -330,6 +390,8 @@
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="meguru_tokenizer.sentencepiece_tokenizer.html#meguru_tokenizer.sentencepiece_tokenizer.SentencePieceVocab">SentencePieceVocab (class in meguru_tokenizer.sentencepiece_tokenizer)</a>
+</li>
       <li><a href="meguru_tokenizer.sudachi_tokenizer.html#meguru_tokenizer.sudachi_tokenizer.SudachiTokenizer">SudachiTokenizer (class in meguru_tokenizer.sudachi_tokenizer)</a>
 </li>
   </ul></td>
@@ -346,6 +408,8 @@
         <li><a href="meguru_tokenizer.sudachi_tokenizer.html#meguru_tokenizer.sudachi_tokenizer.SudachiTokenizer.tokenize">(meguru_tokenizer.sudachi_tokenizer.SudachiTokenizer method)</a>
 </li>
         <li><a href="meguru_tokenizer.html#meguru_tokenizer.Tokenizer.tokenize">(meguru_tokenizer.Tokenizer method)</a>
+</li>
+        <li><a href="meguru_tokenizer.whitespace_tokenizer.html#meguru_tokenizer.whitespace_tokenizer.LooseWhitespaceTokenizer.tokenize">(meguru_tokenizer.whitespace_tokenizer.LooseWhitespaceTokenizer method)</a>
 </li>
         <li><a href="meguru_tokenizer.whitespace_tokenizer.html#meguru_tokenizer.whitespace_tokenizer.WhitespaceTokenizer.tokenize">(meguru_tokenizer.whitespace_tokenizer.WhitespaceTokenizer method)</a>
 </li>
@@ -368,6 +432,12 @@
 
       <ul>
         <li><a href="meguru_tokenizer.base_tokenizer.html#meguru_tokenizer.base_tokenizer.Tokenizer">(class in meguru_tokenizer.base_tokenizer)</a>
+</li>
+      </ul></li>
+      <li><a href="meguru_tokenizer.base_tokenizer.html#meguru_tokenizer.base_tokenizer.Tokenizer.tokenizer">tokenizer (meguru_tokenizer.base_tokenizer.Tokenizer attribute)</a>
+
+      <ul>
+        <li><a href="meguru_tokenizer.html#meguru_tokenizer.Tokenizer.tokenizer">(meguru_tokenizer.Tokenizer attribute)</a>
 </li>
       </ul></li>
       <li><a href="meguru_tokenizer.sentencepiece_tokenizer.html#meguru_tokenizer.sentencepiece_tokenizer.SentencePieceTokenizer.train_sp">train_sp() (meguru_tokenizer.sentencepiece_tokenizer.SentencePieceTokenizer method)</a>
@@ -400,10 +470,40 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="meguru_tokenizer.whitespace_tokenizer.html#meguru_tokenizer.whitespace_tokenizer.WhitespaceTokenizer">WhitespaceTokenizer (class in meguru_tokenizer.whitespace_tokenizer)</a>
 </li>
+      <li><a href="meguru_tokenizer.sentencepiece_tokenizer.html#meguru_tokenizer.sentencepiece_tokenizer.SentencePieceVocab.word2idx">word2idx() (meguru_tokenizer.sentencepiece_tokenizer.SentencePieceVocab method)</a>
+
+      <ul>
+        <li><a href="meguru_tokenizer.vocab.html#meguru_tokenizer.vocab.BaseVocab.word2idx">(meguru_tokenizer.vocab.BaseVocab method)</a>
+</li>
+        <li><a href="meguru_tokenizer.vocab.html#meguru_tokenizer.vocab.Vocab.word2idx">(meguru_tokenizer.vocab.Vocab method)</a>
+</li>
+      </ul></li>
+      <li><a href="meguru_tokenizer.process.noise_pytorch.html#meguru_tokenizer.process.noise_pytorch.Noiser.word_blank">word_blank() (meguru_tokenizer.process.noise_pytorch.Noiser method)</a>
+
+      <ul>
+        <li><a href="meguru_tokenizer.process.noise_tf.html#meguru_tokenizer.process.noise_tf.Noiser.word_blank">(meguru_tokenizer.process.noise_tf.Noiser method)</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="meguru_tokenizer.vocab.html#meguru_tokenizer.vocab.Vocab.word2idx">word2idx() (meguru_tokenizer.vocab.Vocab method)</a>
+      <li><a href="meguru_tokenizer.process.noise_pytorch.html#meguru_tokenizer.process.noise_pytorch.Noiser.word_drop">word_drop() (meguru_tokenizer.process.noise_pytorch.Noiser method)</a>
+
+      <ul>
+        <li><a href="meguru_tokenizer.process.noise_tf.html#meguru_tokenizer.process.noise_tf.Noiser.word_drop">(meguru_tokenizer.process.noise_tf.Noiser method)</a>
 </li>
+      </ul></li>
+      <li><a href="meguru_tokenizer.process.noise_pytorch.html#meguru_tokenizer.process.noise_pytorch.Noiser.word_shuffle">word_shuffle() (meguru_tokenizer.process.noise_pytorch.Noiser method)</a>
+
+      <ul>
+        <li><a href="meguru_tokenizer.process.noise_tf.html#meguru_tokenizer.process.noise_tf.Noiser.word_shuffle">(meguru_tokenizer.process.noise_tf.Noiser method)</a>
+</li>
+      </ul></li>
+      <li><a href="meguru_tokenizer.process.noise_pytorch.html#meguru_tokenizer.process.noise_pytorch.Noiser.word_substitute">word_substitute() (meguru_tokenizer.process.noise_pytorch.Noiser method)</a>
+
+      <ul>
+        <li><a href="meguru_tokenizer.process.noise_tf.html#meguru_tokenizer.process.noise_tf.Noiser.word_substitute">(meguru_tokenizer.process.noise_tf.Noiser method)</a>
+</li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -419,19 +519,11 @@
 
   <div role="contentinfo">
     <p>
-        
         &copy; Copyright 2020, MokkeMeguru
 
     </p>
   </div>
-    
-    
-    
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -442,6 +534,7 @@
 
   </div>
   
+
 
   <script type="text/javascript">
       jQuery(function () {

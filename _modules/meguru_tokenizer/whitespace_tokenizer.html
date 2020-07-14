@@ -1,7 +1,8 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   
@@ -11,19 +12,12 @@
   
 
   
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
-
-  
   
   
   
 
   
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
@@ -35,6 +29,11 @@
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
     
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
 </head>
@@ -50,7 +49,7 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> meguru_tokenizer
+            <a href="../../index.html" class="icon icon-home"> meguru_tokenizer
           
 
           
@@ -73,7 +72,6 @@
           
         </div>
 
-        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -89,7 +87,6 @@
             
           
         </div>
-        
       </div>
     </nav>
 
@@ -128,7 +125,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
         
           <li><a href="../index.html">Module code</a> &raquo;</li>
         
@@ -165,12 +162,12 @@
 <span class="sd">    Example:</span>
 
 <span class="sd">        &gt;&gt;&gt; import pprint</span>
-<span class="sd">        &gt;&gt;&gt; tokenizer = EnglishWhitespaceTokenizer(lower=True)</span>
+<span class="sd">        &gt;&gt;&gt; tokenizer = WhitespaceTokenizer(lower=True, language=&quot;en&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; sentences = [</span>
-<span class="sd">                &quot;Hello, I don&#39;t know how to use it?&quot;,</span>
-<span class="sd">                &quot;Tensorflow is awesome!&quot;,</span>
-<span class="sd">                &quot;it is good framework.&quot;,</span>
-<span class="sd">             ]</span>
+<span class="sd">        &gt;&gt;&gt;     &quot;Hello, I don&#39;t know how to use it?&quot;,</span>
+<span class="sd">        &gt;&gt;&gt;     &quot;Tensorflow is awesome!&quot;,</span>
+<span class="sd">        &gt;&gt;&gt;     &quot;it is good framework.&quot;,</span>
+<span class="sd">        &gt;&gt;&gt;  ]</span>
 <span class="sd">        &gt;&gt;&gt; vocab = Vocab()</span>
 <span class="sd">        &gt;&gt;&gt; for sentence in sentences:</span>
 <span class="sd">                vocab.add_vocabs(tokenizer.tokenize(sentence))</span>
@@ -180,9 +177,9 @@
 <span class="sd">        &gt;&gt;&gt; print(&quot;vocabs:&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; pprint.pprint(vocab.i2w)</span>
 <span class="sd">        {0: &#39;&lt;pad&gt;&#39;,</span>
-<span class="sd">         1: &#39;&lt;unk&gt;&#39;,</span>
-<span class="sd">         2: &#39;&lt;s&gt;&#39;,</span>
-<span class="sd">         3: &#39;&lt;/s&gt;&#39;,</span>
+<span class="sd">         1: &#39;&lt;s&gt;&#39;,</span>
+<span class="sd">         2: &#39;&lt;/s&gt;&#39;,</span>
+<span class="sd">         3: &#39;&lt;unk&gt;&#39;,</span>
 <span class="sd">         4: &#39;&lt;mask&gt;&#39;,</span>
 <span class="sd">         5: &#39;it&#39;,</span>
 <span class="sd">         6: &#39;is&#39;,</span>
@@ -256,6 +253,28 @@
         <span class="k">return</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">words</span><span class="p">)</span></div></div>
 
 
+<div class="viewcode-block" id="LooseWhitespaceTokenizer"><a class="viewcode-back" href="../../meguru_tokenizer.whitespace_tokenizer.html#meguru_tokenizer.whitespace_tokenizer.LooseWhitespaceTokenizer">[docs]</a><span class="k">class</span> <span class="nc">LooseWhitespaceTokenizer</span><span class="p">(</span><span class="n">WhitespaceTokenizer</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;tokenizer splits by whitespace (without NLTK tokenize)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">languages</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;en&quot;</span><span class="p">,</span> <span class="s2">&quot;de&quot;</span><span class="p">,</span> <span class="s2">&quot;ja&quot;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">vocab</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Vocab</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">normalize</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">lower</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">language</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;unk&quot;</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">vocab</span><span class="o">=</span><span class="n">vocab</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="n">normalize</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="n">lower</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="n">language</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="LooseWhitespaceTokenizer.tokenize"><a class="viewcode-back" href="../../meguru_tokenizer.whitespace_tokenizer.html#meguru_tokenizer.whitespace_tokenizer.LooseWhitespaceTokenizer.tokenize">[docs]</a>    <span class="k">def</span> <span class="nf">tokenize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sentence</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">sentence</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_normalize</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalize</span> <span class="k">else</span> <span class="n">sentence</span>
+        <span class="k">return</span> <span class="n">sentence</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span></div></div>
+
+
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">pprint</span>
 
@@ -319,19 +338,11 @@
 
   <div role="contentinfo">
     <p>
-        
         &copy; Copyright 2020, MokkeMeguru
 
     </p>
   </div>
-    
-    
-    
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -342,6 +353,7 @@
 
   </div>
   
+
 
   <script type="text/javascript">
       jQuery(function () {

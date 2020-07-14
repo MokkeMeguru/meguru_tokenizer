@@ -1,0 +1,264 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>meguru_tokenizer.process.noise_pytorch &mdash; meguru_tokenizer 0.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> meguru_tokenizer
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../meguru_tokenizer.html">meguru_tokenizer package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">meguru_tokenizer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>meguru_tokenizer.process.noise_pytorch</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for meguru_tokenizer.process.noise_pytorch</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;noising batched tokenized text for pytorch</span>
+
+<span class="sd">    origin https://github.com/shentianxiao/text-autoencoders</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">meguru_tokenizer.vocab</span> <span class="kn">import</span> <span class="n">BaseVocab</span>
+
+
+<div class="viewcode-block" id="Noiser"><a class="viewcode-back" href="../../../meguru_tokenizer.process.noise_pytorch.html#meguru_tokenizer.process.noise_pytorch.Noiser">[docs]</a><span class="k">class</span> <span class="nc">Noiser</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Noising per padded batch tensor</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        x is the torch.Tensor whose shape is [\|S\|, B]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vocab</span><span class="p">:</span> <span class="n">BaseVocab</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">unk_id</span> <span class="o">=</span> <span class="n">vocab</span><span class="o">.</span><span class="n">word2idx</span><span class="p">(</span><span class="n">vocab</span><span class="o">.</span><span class="n">unk</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bos_id</span> <span class="o">=</span> <span class="n">vocab</span><span class="o">.</span><span class="n">word2idx</span><span class="p">(</span><span class="n">vocab</span><span class="o">.</span><span class="n">bos</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pad_id</span> <span class="o">=</span> <span class="n">vocab</span><span class="o">.</span><span class="n">word2idx</span><span class="p">(</span><span class="n">vocab</span><span class="o">.</span><span class="n">pad</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mask_id</span> <span class="o">=</span> <span class="n">vocab</span><span class="o">.</span><span class="n">word2idx</span><span class="p">(</span><span class="n">vocab</span><span class="o">.</span><span class="n">mask</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Noiser.word_shuffle"><a class="viewcode-back" href="../../../meguru_tokenizer.process.noise_pytorch.html#meguru_tokenizer.process.noise_pytorch.Noiser.word_shuffle">[docs]</a>    <span class="k">def</span> <span class="nf">word_shuffle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>  <span class="c1"># slight shuffle such that |sigma[i]-i| &lt;= k</span>
+        <span class="n">base</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">)</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">t</span><span class="p">()</span>
+        <span class="n">inc</span> <span class="o">=</span> <span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
+        <span class="n">inc</span><span class="p">[</span><span class="n">x</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">bos_id</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># do not shuffle the start sentence symbol</span>
+        <span class="n">inc</span><span class="p">[</span><span class="n">x</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">pad_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span>  <span class="c1"># do not shuffle end paddings</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="p">(</span><span class="n">base</span> <span class="o">+</span> <span class="n">inc</span><span class="p">)</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span><span class="p">[</span><span class="n">sigma</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">1</span><span class="p">))]</span></div>
+
+<div class="viewcode-block" id="Noiser.word_drop"><a class="viewcode-back" href="../../../meguru_tokenizer.process.noise_pytorch.html#meguru_tokenizer.process.noise_pytorch.Noiser.word_drop">[docs]</a>    <span class="k">def</span> <span class="nf">word_drop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>  <span class="c1"># drop words with probability p</span>
+        <span class="n">x_</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">1</span><span class="p">)):</span>
+            <span class="n">words</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+            <span class="n">keep</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">))</span> <span class="o">&gt;</span> <span class="n">p</span>
+            <span class="n">keep</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># do not drop the start sentence symbol</span>
+            <span class="n">sent</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span> <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">words</span><span class="p">)</span> <span class="k">if</span> <span class="n">keep</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span>
+            <span class="n">sent</span> <span class="o">+=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">pad_id</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">sent</span><span class="p">))</span>
+            <span class="n">x_</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sent</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">LongTensor</span><span class="p">(</span><span class="n">x_</span><span class="p">)</span><span class="o">.</span><span class="n">t</span><span class="p">()</span><span class="o">.</span><span class="n">contiguous</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">device</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Noiser.word_blank"><a class="viewcode-back" href="../../../meguru_tokenizer.process.noise_pytorch.html#meguru_tokenizer.process.noise_pytorch.Noiser.word_blank">[docs]</a>    <span class="k">def</span> <span class="nf">word_blank</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>  <span class="c1"># blank words with probability p</span>
+        <span class="n">blank</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">device</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">device</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">p</span><span class="p">)</span>
+            <span class="o">&amp;</span> <span class="p">(</span><span class="n">x</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bos_id</span><span class="p">)</span>
+            <span class="o">&amp;</span> <span class="p">(</span><span class="n">x</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pad_id</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">x_</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+        <span class="n">x_</span><span class="p">[</span><span class="n">blank</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mask_id</span>
+        <span class="k">return</span> <span class="n">x_</span></div>
+
+<div class="viewcode-block" id="Noiser.word_substitute"><a class="viewcode-back" href="../../../meguru_tokenizer.process.noise_pytorch.html#meguru_tokenizer.process.noise_pytorch.Noiser.word_substitute">[docs]</a>    <span class="k">def</span> <span class="nf">word_substitute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>  <span class="c1"># substitute words with probability p</span>
+        <span class="n">keep</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">device</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">device</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">p</span><span class="p">)</span>
+            <span class="o">|</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">bos_id</span><span class="p">)</span>
+            <span class="o">|</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">pad_id</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">x_</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+        <span class="n">x_</span><span class="o">.</span><span class="n">random_</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">))</span>
+        <span class="n">x_</span><span class="p">[</span><span class="n">keep</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">keep</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">x_</span></div>
+
+<div class="viewcode-block" id="Noiser.noisy"><a class="viewcode-back" href="../../../meguru_tokenizer.process.noise_pytorch.html#meguru_tokenizer.process.noise_pytorch.Noiser.noisy">[docs]</a>    <span class="k">def</span> <span class="nf">noisy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">drop_prob</span><span class="p">,</span> <span class="n">blank_prob</span><span class="p">,</span> <span class="n">sub_prob</span><span class="p">,</span> <span class="n">shuffle_dist</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">shuffle_dist</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">word_shuffle</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">shuffle_dist</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">drop_prob</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">word_drop</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">drop_prob</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">blank_prob</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">word_blank</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">blank_prob</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">sub_prob</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">word_substitute</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sub_prob</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, MokkeMeguru
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
