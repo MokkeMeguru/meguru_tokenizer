@@ -4,7 +4,7 @@ from typing import List, Optional
 
 #  from ginza.sudachipy_tokenizer import SUDACHIPY_DEFAULT_SPLIT_MODE
 #  from ginza.command_line import Analyzer
-from ginza.sudachipy_tokenizer import SudachipyTokenizer
+import spacy
 from meguru_tokenizer.base_tokenizer import Tokenizer
 from meguru_tokenizer.vocab import Vocab
 from pathlib import Path
@@ -87,8 +87,8 @@ class SudachiTokenizer(Tokenizer):
         """
         super().__init__(normalize=normalize, lower=lower, language=language)
 
+        self.nlp = spacy.load("ja_ginza")
         self.vocab = vocab
-        self.analyzer = SudachipyTokenizer()
         self.sudachi_normalize = sudachi_normalize
 
     def _mecab_token_to_keyword(self, token):
@@ -101,9 +101,9 @@ class SudachiTokenizer(Tokenizer):
             str: token(normalized / unnormalized)
         """
         if self.sudachi_normalize:
-            return token.normalized_form()
+            return token.lemma_
         else:
-            return token.surface()
+            return token.orth_
 
     def _analyze_mecab(self, sudachipy_tokens: List):
         """sudachipy's token to string words tuple
@@ -126,7 +126,7 @@ class SudachiTokenizer(Tokenizer):
         line = line.rstrip()
         if line == "":
             return ""
-        doc = self.analyzer.tokenizer.tokenize(line)
+        doc = self.nlp(line)
         return self._analyze_mecab(doc)
 
     def tokenize(self, sentence: str):
