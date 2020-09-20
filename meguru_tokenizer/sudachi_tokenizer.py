@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 
 from typing import List, Optional
-from ginza.sudachipy_tokenizer import SUDACHIPY_DEFAULT_SPLIT_MODE
-from ginza.command_line import Analyzer
+
+#  from ginza.sudachipy_tokenizer import SUDACHIPY_DEFAULT_SPLIT_MODE
+#  from ginza.command_line import Analyzer
+from ginza.sudachipy_tokenizer import SudachipyTokenizer
 from meguru_tokenizer.base_tokenizer import Tokenizer
 from meguru_tokenizer.vocab import Vocab
 from pathlib import Path
@@ -84,16 +86,9 @@ class SudachiTokenizer(Tokenizer):
             enable_gpu(bool): allow to use gpu
         """
         super().__init__(normalize=normalize, lower=lower, language=language)
+
         self.vocab = vocab
-        self.analyzer = Analyzer(
-            model_path=None,
-            sudachipy_mode=SUDACHIPY_DEFAULT_SPLIT_MODE,
-            use_sentence_separator=None,
-            hash_comment="print",
-            output_format="mecab",
-            require_gpu=enable_gpu,
-        )
-        self.analyzer.set_nlp()
+        self.analyzer = SudachipyTokenizer()
         self.sudachi_normalize = sudachi_normalize
 
     def _mecab_token_to_keyword(self, token):
@@ -131,7 +126,7 @@ class SudachiTokenizer(Tokenizer):
         line = line.rstrip()
         if line == "":
             return ""
-        doc = self.analyzer.nlp.tokenize(line)
+        doc = self.analyzer.tokenizer.tokenize(line)
         return self._analyze_mecab(doc)
 
     def tokenize(self, sentence: str):

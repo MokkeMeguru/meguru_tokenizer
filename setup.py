@@ -17,11 +17,11 @@ with open("readme.md") as readme_file:
     readme = readme_file.read()
 
 requirements = [
-    "ginza",
+    "ginza>=4.0.0",
     "sentencepiece",
     "neologdn",
     "nltk",
-    "spacy==2.2.4",
+    "spacy>=2.2.4",
     "sudachidict-full",
     "torch",
     "tensorflow>=2.2.0",
